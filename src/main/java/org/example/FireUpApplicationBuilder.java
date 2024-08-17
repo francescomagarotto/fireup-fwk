@@ -8,6 +8,9 @@ import lombok.Getter;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.SparkSession;
 import org.example.configuration.FireUpModule;
+import org.example.etl.Logic;
+import org.example.etl.Sink;
+import org.example.etl.Source;
 import org.example.parser.BaseCommandLineParser;
 import org.example.parser.CommandLineParser;
 import org.jetbrains.annotations.NotNull;
@@ -101,7 +104,7 @@ public class FireUpApplicationBuilder {
                 return this;
             }
 
-            public FireUpApplicationBuilder build() {
+            public FireUpApplicationBuilder toApplication() {
                 Preconditions.checkNotNull(source, "ETL source cannot be null");
                 Preconditions.checkNotNull(logic, "ETL logic cannot be null");
                 Preconditions.checkNotNull(sink, "ETL sink cannot be null");

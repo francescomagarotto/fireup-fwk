@@ -1,4 +1,4 @@
-package org.example;
+package org.example.etl;
 
 import com.google.inject.Injector;
 import org.apache.spark.sql.Dataset;

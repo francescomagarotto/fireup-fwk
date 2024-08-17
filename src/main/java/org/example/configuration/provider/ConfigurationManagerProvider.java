@@ -18,7 +18,8 @@ public class ConfigurationManagerProvider implements Provider<PropertiesManager>
 
     @Override
     public PropertiesManager get() {
-        return context.isRunningOnDataproc() ? new DataProcPropertiesManager()
+        return context.isRunningOnDataproc()
+                ? new DataProcPropertiesManager()
                 : new LocalPropertiesManager();
     }
 }
