@@ -12,8 +12,7 @@ import java.util.Map;
 public class CSVSource implements Source<Row> {
 
     @Override
-    public Dataset<Row> source(Injector injector, Map<String, String> args) {
-        SparkSession sparkSession = injector.getInstance(SparkSession.class);
+    public Dataset<Row> source(Injector injector, SparkSession sparkSession, Map<String, String> args) {
         PropertiesManager propertiesManager = injector.getInstance(PropertiesManager.class);
         return sparkSession.read().format("csv").load();
     }

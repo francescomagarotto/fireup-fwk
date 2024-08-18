@@ -56,7 +56,7 @@ public class FireUpApplicationBuilder {
         SparkSession sparkSession = injector.getInstance(SparkSession.class);
         Objects.requireNonNull(sparkSession, "Spark session cannot be null");
         CommandLineParser commandLineParser = new BaseCommandLineParser();
-        this.etlPipeline.run(injector, commandLineParser.parse(args));
+        this.etlPipeline.run(injector, sparkSession, commandLineParser.parse(args));
         sparkSession.close();
     }
 
@@ -73,10 +73,10 @@ public class FireUpApplicationBuilder {
             this.sink = sink;
         }
 
-        void run(Injector injector, Map<String, String> args) {
-            Dataset<I> sourceDataset = this.source.source(injector, args);
-            Dataset<O> transformedDataset = this.logic.transform(sourceDataset, injector, args);
-            this.sink.flush(transformedDataset, injector, args);
+        void run(Injector injector, SparkSession sparkSession, Map<String, String> args) {
+            Dataset<I> sourceDataset = this.source.source(injector, sparkSession, args);
+            Dataset<O> transformedDataset = this.logic.logic(sourceDataset, sparkSession, injector, args);
+            this.sink.flush(transformedDataset, injector, sparkSession, args);
         }
 
         public static class EtlPipelineBuilder<I, O> {
