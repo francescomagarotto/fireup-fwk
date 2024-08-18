@@ -1,12 +1,12 @@
-package org.example.configuration.provider;
+package org.example.provider;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import org.apache.spark.sql.SparkSession;
 import org.example.configuration.FireUpRunningContext;
+import org.example.guice.SerializableProvider;
 
 
-public class SparkSessionProvider implements Provider<SparkSession> {
+public class SparkSessionProvider implements SerializableProvider<SparkSession> {
 
     private final String appName;
     private final FireUpRunningContext fireUpRunningContext;

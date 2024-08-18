@@ -1,4 +1,4 @@
-package org.example.configuration.properties;
+package org.example.properties;
 
 import com.google.common.base.Preconditions;
 

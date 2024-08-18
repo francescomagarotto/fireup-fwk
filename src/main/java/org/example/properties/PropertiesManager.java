@@ -1,6 +1,8 @@
-package org.example.configuration.properties;
+package org.example.properties;
 
-public interface PropertiesManager {
+import java.io.Serializable;
+
+public interface PropertiesManager extends Serializable {
     Object get(String key);
 
     default Integer getAsInteger(String key) {

@@ -1,13 +1,13 @@
-package org.example.configuration.provider;
+package org.example.provider;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
-import org.example.configuration.properties.PropertiesManager;
-import org.example.configuration.properties.DataProcPropertiesManager;
 import org.example.configuration.FireUpRunningContext;
-import org.example.configuration.properties.LocalPropertiesManager;
+import org.example.guice.SerializableProvider;
+import org.example.properties.DataProcPropertiesManager;
+import org.example.properties.LocalPropertiesManager;
+import org.example.properties.PropertiesManager;
 
-public class ConfigurationManagerProvider implements Provider<PropertiesManager> {
+public class ConfigurationManagerProvider implements SerializableProvider<PropertiesManager> {
 
     private final FireUpRunningContext context;
 

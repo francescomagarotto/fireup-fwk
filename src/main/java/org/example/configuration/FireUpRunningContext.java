@@ -1,7 +1,9 @@
 package org.example.configuration;
 
 
-public class FireUpRunningContext {
+import java.io.Serializable;
+
+public class FireUpRunningContext implements Serializable {
 
     private final boolean isRunningOnDataproc;
 

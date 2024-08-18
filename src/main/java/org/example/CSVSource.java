@@ -4,7 +4,7 @@ import com.google.inject.Injector;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
-import org.example.configuration.properties.PropertiesManager;
+import org.example.properties.PropertiesManager;
 import org.example.etl.Source;
 
 import java.util.Map;

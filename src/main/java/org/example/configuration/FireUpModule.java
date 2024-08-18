@@ -3,11 +3,13 @@ package org.example.configuration;
 import com.google.inject.AbstractModule;
 import com.google.inject.name.Names;
 import org.apache.spark.sql.SparkSession;
-import org.example.configuration.properties.PropertiesManager;
-import org.example.configuration.provider.ConfigurationManagerProvider;
-import org.example.configuration.provider.SparkSessionProvider;
+import org.example.properties.PropertiesManager;
+import org.example.provider.ConfigurationManagerProvider;
+import org.example.provider.SparkSessionProvider;
 
-public class FireUpModule extends AbstractModule {
+import java.io.Serializable;
+
+public class FireUpModule extends AbstractModule implements Serializable {
 
     private final String appName;
 
