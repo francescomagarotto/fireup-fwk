@@ -2,9 +2,9 @@ package org.example.configuration;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.name.Names;
+import com.typesafe.config.Config;
 import org.apache.spark.sql.SparkSession;
-import org.example.properties.PropertiesManager;
-import org.example.provider.ConfigurationManagerProvider;
+import org.example.provider.ConfigurationProvider;
 import org.example.provider.SparkSessionProvider;
 
 import java.io.Serializable;
@@ -20,8 +20,8 @@ public class FireUpModule extends AbstractModule implements Serializable {
     @Override
     protected void configure() {
         bind(String.class).annotatedWith(Names.named("appName")).toInstance(appName);
-        bind(FireUpRunningContext.class).to(FireUpRunningContext.class).asEagerSingleton();
-        bind(PropertiesManager.class).toProvider(ConfigurationManagerProvider.class).asEagerSingleton();
+        bind(FireUpRunningContext.class).asEagerSingleton();
+        bind(Config.class).toProvider(ConfigurationProvider.class).asEagerSingleton();
         bind(SparkSession.class).toProvider(SparkSessionProvider.class).asEagerSingleton();
     }
 }

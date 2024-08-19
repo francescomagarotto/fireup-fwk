@@ -4,5 +4,5 @@ import com.google.inject.Provider;
 
 import java.io.Serializable;
 
-public interface SerializableProvider<T extends Serializable> extends Provider<T>, Serializable {
+public interface SerializableProvider<T> extends Provider<T>, Serializable {
 }
