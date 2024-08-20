@@ -1,9 +1,9 @@
-package org.example.configuration;
+package org.fireup.spark.configuration;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.name.Names;
 import com.typesafe.config.Config;
-import org.example.provider.ConfigurationProvider;
+import org.fireup.spark.provider.ConfigurationProvider;
 
 import java.io.Serializable;
 

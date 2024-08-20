@@ -1,4 +1,4 @@
-package org.example.parser;
+package org.fireup.spark.parser;
 
 import com.google.common.base.Preconditions;
 

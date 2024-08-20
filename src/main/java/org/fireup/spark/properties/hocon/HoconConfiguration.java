@@ -1,4 +1,4 @@
-package org.example.properties.hocon;
+package org.fireup.spark.properties.hocon;
 
 import com.typesafe.config.Config;
 

@@ -1,4 +1,4 @@
-package org.example.configuration;
+package org.fireup.spark.configuration;
 
 
 import java.io.Serializable;

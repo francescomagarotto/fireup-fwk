@@ -1,4 +1,4 @@
-package org.example.parser;
+package org.fireup.spark.parser;
 
 import java.io.Serializable;
 import java.util.Map;

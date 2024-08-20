@@ -1,26 +1,22 @@
-package org.example;
+package org.fireup.spark;
 
 import com.google.common.base.Preconditions;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.google.inject.Module;
 import com.typesafe.config.Config;
 import lombok.Getter;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.SparkSession;
-import org.example.configuration.ConfigurationModule;
-import org.example.configuration.FireUpModule;
-import org.example.etl.Logic;
-import org.example.etl.Sink;
-import org.example.etl.Source;
-import org.example.parser.BaseCommandLineParser;
-import org.example.parser.CommandLineParser;
+import org.fireup.spark.configuration.ConfigurationModule;
+import org.fireup.spark.configuration.FireUpModule;
+import org.fireup.spark.etl.Logic;
+import org.fireup.spark.etl.Sink;
+import org.fireup.spark.etl.Source;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 

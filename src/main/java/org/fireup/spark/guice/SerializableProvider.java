@@ -1,4 +1,4 @@
-package org.example.guice;
+package org.fireup.spark.guice;
 
 import com.google.inject.Provider;
 

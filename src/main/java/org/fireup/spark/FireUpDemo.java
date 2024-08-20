@@ -1,4 +1,4 @@
-package org.example;
+package org.fireup.spark;
 
 import org.apache.spark.sql.Row;
 

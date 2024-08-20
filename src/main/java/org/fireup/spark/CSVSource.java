@@ -1,12 +1,12 @@
-package org.example;
+package org.fireup.spark;
 
 import com.google.inject.Injector;
 import com.typesafe.config.Config;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
-import org.example.provider.ConfigurationProvider;
-import org.example.etl.Source;
+import org.fireup.spark.provider.ConfigurationProvider;
+import org.fireup.spark.etl.Source;
 
 public class CSVSource implements Source<Row> {
 

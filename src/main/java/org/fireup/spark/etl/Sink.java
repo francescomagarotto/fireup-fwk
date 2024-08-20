@@ -1,4 +1,4 @@
-package org.example.etl;
+package org.fireup.spark.etl;
 
 import com.google.inject.Injector;
 import com.typesafe.config.Config;

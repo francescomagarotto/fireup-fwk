@@ -1,9 +1,9 @@
-package org.example.configuration;
+package org.fireup.spark.configuration;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.name.Names;
 import org.apache.spark.sql.SparkSession;
-import org.example.provider.SparkSessionProvider;
+import org.fireup.spark.provider.SparkSessionProvider;
 
 import java.io.Serializable;
 

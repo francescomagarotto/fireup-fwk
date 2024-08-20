@@ -1,6 +1,6 @@
-package org.example;
+package org.fireup.spark;
 
-import org.example.parser.BaseCommandLineParser;
+import org.fireup.spark.parser.BaseCommandLineParser;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;
