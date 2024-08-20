@@ -16,9 +16,8 @@ public class FireUpModule extends AbstractModule implements Serializable {
 
     @Override
     protected void configure() {
-        bind(String.class).annotatedWith(Names.named("appName")).toInstance(appName);
+        bind(String.class).annotatedWith(Names.named("AppName")).toInstance(appName);
         bind(FireUpRunningContext.class).asEagerSingleton();
         bind(SparkSession.class).toProvider(SparkSessionProvider.class).asEagerSingleton();
-
     }
 }

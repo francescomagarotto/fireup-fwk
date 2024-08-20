@@ -1,6 +1,7 @@
 package org.example.provider;
 
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigValue;
 import org.apache.spark.sql.SparkSession;
@@ -17,7 +18,9 @@ public class SparkSessionProvider implements SerializableProvider<SparkSession> 
     private final Config config;
 
     @Inject
-    public SparkSessionProvider(String appName, FireUpRunningContext fireUpRunningContext, Config config) {
+    public SparkSessionProvider(@Named("AppName") String appName,
+                                FireUpRunningContext fireUpRunningContext,
+                                Config config) {
         this.appName = appName;
         this.fireUpRunningContext = fireUpRunningContext;
         this.config = config;
