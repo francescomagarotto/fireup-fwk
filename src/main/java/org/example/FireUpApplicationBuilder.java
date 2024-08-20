@@ -1,12 +1,16 @@
 package org.example;
 
 import com.google.common.base.Preconditions;
+import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
+import com.typesafe.config.Config;
 import lombok.Getter;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.SparkSession;
+import org.example.configuration.ConfigurationModule;
 import org.example.configuration.FireUpModule;
 import org.example.etl.Logic;
 import org.example.etl.Sink;
@@ -15,14 +19,15 @@ import org.example.parser.BaseCommandLineParser;
 import org.example.parser.CommandLineParser;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 public class FireUpApplicationBuilder {
     private String appName;
     private String[] args;
-    private List<? extends Module> modules;
+    private List<AbstractModule> modules = new ArrayList<>(0);
     private EtlPipeline<?, ?> etlPipeline;
 
     public static FireUpApplicationBuilder create() {
@@ -39,7 +44,7 @@ public class FireUpApplicationBuilder {
         return this;
     }
 
-    public FireUpApplicationBuilder modules(List<? extends Module> modules) {
+    public FireUpApplicationBuilder withAdditionalModules(List<AbstractModule> modules) {
         this.modules = modules;
         return this;
     }
@@ -51,12 +56,13 @@ public class FireUpApplicationBuilder {
     public void run() {
         Preconditions.checkNotNull(appName, "appName cannot be null");
         Preconditions.checkNotNull(etlPipeline, "ETL Pipeline logic cannot be null");
-        this.modules = Objects.requireNonNullElse(modules, List.of(new FireUpModule(appName)));
+        List<AbstractModule> defaultModule = List.of(new ConfigurationModule(this.args), new FireUpModule(appName));
+        CollectionUtils.addAll(modules, defaultModule);
         Injector injector = Guice.createInjector(modules);
         SparkSession sparkSession = injector.getInstance(SparkSession.class);
         Objects.requireNonNull(sparkSession, "Spark session cannot be null");
-        CommandLineParser commandLineParser = new BaseCommandLineParser();
-        this.etlPipeline.run(injector, sparkSession, commandLineParser.parse(args));
+        Config config = injector.getInstance(Config.class);
+        this.etlPipeline.run(injector, sparkSession, config);
         sparkSession.close();
     }
 
@@ -73,10 +79,10 @@ public class FireUpApplicationBuilder {
             this.sink = sink;
         }
 
-        void run(Injector injector, SparkSession sparkSession, Map<String, String> args) {
-            Dataset<I> sourceDataset = this.source.source(injector, sparkSession, args);
-            Dataset<O> transformedDataset = this.logic.logic(sourceDataset, sparkSession, injector, args);
-            this.sink.flush(transformedDataset, injector, sparkSession, args);
+        void run(Injector injector, SparkSession sparkSession, Config config) {
+            Dataset<I> sourceDataset = this.source.source(injector, sparkSession, config);
+            Dataset<O> transformedDataset = this.logic.logic(sourceDataset, sparkSession, injector, config);
+            this.sink.flush(transformedDataset, injector, sparkSession, config);
         }
 
         public static class EtlPipelineBuilder<I, O> {

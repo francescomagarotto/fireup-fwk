@@ -1,13 +1,13 @@
 package org.example.etl;
 
 import com.google.inject.Injector;
+import com.typesafe.config.Config;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.SparkSession;
 
 import java.io.Serializable;
-import java.util.Map;
 
 public interface Sink<O> extends Serializable {
 
-    void flush(Dataset<O> dataset, Injector injector, SparkSession sparkSession, Map<String, String> args);
+    void flush(Dataset<O> dataset, Injector injector, SparkSession sparkSession, Config args);
 }
